@@ -25,12 +25,10 @@
   },
   "dependencies": {
     "node-fetch": "^1.6.3",
-    "replaceall": "^0.1.6"
-  },
-  "devDependencies": {
     "babel-plugin-syntax-async-functions": "^6.13.0",
     "babel-plugin-transform-regenerator": "^6.22.0",
     "babel-polyfill": "^6.22.0",
     "babel-preset-es2015": "^6.22.0"
-  }
+  },
+  "devDependencies": {}
 }
