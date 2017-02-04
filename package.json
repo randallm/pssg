@@ -1,6 +1,6 @@
 {
   "name": "pssg",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Node client for Google Screenshot API",
   "main": "pssg.js",
   "scripts": {
