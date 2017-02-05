@@ -18,28 +18,36 @@ require('babel-polyfill');
 
 
 module.exports = {
-  API_URL: 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed?screenshot=true&strategy=mobile&url=',
+  API_URL: 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed?screenshot=true',
   _download: function _download(url, opts) {
-    var json, data, file;
+    var urlToFetch, resp, json, data, file;
     return regeneratorRuntime.async(function _download$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            _context.next = 2;
-            return regeneratorRuntime.awrap((0, _nodeFetch2.default)(this.API_URL + url, { method: 'get' }).then(function (resp) {
-              return resp.json();
-            }));
+            if (opts && opts.mobile) {
+              urlToFetch = this.API_URL + '&strategy=mobile&url=' + encodeURI(url);
+            } else {
+              urlToFetch = this.API_URL + '&url=' + encodeURI(url);
+            }
 
-          case 2:
+            _context.next = 3;
+            return regeneratorRuntime.awrap((0, _nodeFetch2.default)(urlToFetch, { method: 'get' }));
+
+          case 3:
+            resp = _context.sent;
+            _context.next = 6;
+            return regeneratorRuntime.awrap(resp.json());
+
+          case 6:
             json = _context.sent;
             data = json.screenshot.data;
-
 
             data = data.replace(/_/g, '/');
             data = data.replace(/-/g, '+');
 
             if (!(opts && opts.dest)) {
-              _context.next = 12;
+              _context.next = 16;
               break;
             }
 
@@ -50,10 +58,10 @@ module.exports = {
             });
             return _context.abrupt('return', file);
 
-          case 12:
+          case 16:
             return _context.abrupt('return', data);
 
-          case 13:
+          case 17:
           case 'end':
             return _context.stop();
         }

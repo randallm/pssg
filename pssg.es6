@@ -4,9 +4,16 @@ import fs from 'fs';
 import path from 'path';
 
 module.exports = {
-  API_URL: 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed?screenshot=true&strategy=mobile&url=',
+  API_URL: 'https://www.googleapis.com/pagespeedonline/v1/runPagespeed?screenshot=true',
   _download: async function(url, opts) {
-    var resp = await fetch(this.API_URL + url, {method: 'get'})
+    var urlToFetch;
+    if (opts && opts.mobile) {
+        urlToFetch = `${this.API_URL}&strategy=mobile&url=${encodeURI(url)}`;
+    } else {
+        urlToFetch = `${this.API_URL}&url=${encodeURI(url)}`; 
+    }
+
+    var resp = await fetch(urlToFetch, {method: 'get'})
     var json = await resp.json();
 
     var data = json.screenshot.data;

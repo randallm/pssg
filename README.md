@@ -36,6 +36,24 @@ pssg.base64('http://randallma.com')
 
 That's it!
 
+# API
+
+#### pssg.download(url, opts)
+
+Save a screengrab to disk. Returns a promise, from which you can get the final path to the image.
+
+#### pssg.base64(url)
+
+Fetch the screenshot but don't save it to disk. Returns a promise, from which you can get the base64 encoded image.
+
+#### opts
+
+**dest** - Only used with `pssg.download`. String path to the desired directory in which to save the screengrab.
+
+**filename** - Only used with `pssg.download`. Desired filename for the screengrab. `.jpg` extension will automatically be concatenated.
+
+**mobile** - Boolean, defaults to `false`. Set to `true` to request mobile screengrab of page.
+
 ## License
 
 MIT
